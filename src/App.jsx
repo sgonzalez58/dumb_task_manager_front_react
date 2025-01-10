@@ -4,6 +4,7 @@ import Layout from './components/Layout/Layout'
 import Home from './components/Home/Home'
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
+import Tasks from './components/Tasks/Tasks'
 
 function App() {
 
@@ -13,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout/>}>
             <Route index element={<Home />}/>
-            {/* <Route path="tasks" element={<Home/>}/> */}
+            <Route path="tasks" element={<Tasks/>}/>
             <Route path="login" element={<Login />}/>
             <Route path="register" element={<Register />}/>
           </Route>
