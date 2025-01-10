@@ -5,7 +5,6 @@ import useUserStore from "../../stores/UserStore"
 const Layout = () => {
 
     const {username, userType, loggedIn, logout} = useUserStore()
-    console.log(username, userType, loggedIn)
 
     return (
         <>
