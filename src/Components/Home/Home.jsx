@@ -1,7 +1,11 @@
 import { Link } from "react-router"
-import Layout from "../Layout/Layout"
+import useUserStore from "../../stores/UserStore"
 
 const Home = () =>{
+
+    const isLoggedIn = useUserStore((state) => state.loggedIn)
+    console.log(isLoggedIn)
+
     return (
         <div className="max-w-4xl mx-auto text-center">
             <div className="py-12">
@@ -42,14 +46,24 @@ const Home = () =>{
 
             <div className="bg-blue-50 p-8 rounded-lg shadow-md mb-12">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Prêt à commencer ?</h2>
-                <div className="space-x-4">
-                    <Link to="/register" className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700">
-                        Créer un compte
-                    </Link>
-                    <Link to="/login" className="inline-block px-6 py-3 bg-white text-blue-600 font-medium rounded-md hover:bg-gray-50">
-                        Se connecter
-                    </Link>
-                </div>
+                { ! isLoggedIn && (
+                    <div className="space-x-4">
+                        <Link to="/register" className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700">
+                            Créer un compte
+                        </Link>
+                        <Link to="/login" className="inline-block px-6 py-3 bg-white text-blue-600 font-medium rounded-md hover:bg-gray-50">
+                            Se connecter
+                        </Link>
+                    </div>
+                )}
+                { isLoggedIn && (
+                    <div className="space-x-4">
+                        <Link to="/tasks" className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700">
+                            Voir mes tâches
+                        </Link>
+                    </div>
+                )}
+                
             </div>
         </div>
     )
