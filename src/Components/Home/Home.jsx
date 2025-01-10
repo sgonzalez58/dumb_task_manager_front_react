@@ -4,7 +4,6 @@ import useUserStore from "../../stores/UserStore"
 const Home = () =>{
 
     const isLoggedIn = useUserStore((state) => state.loggedIn)
-    console.log(isLoggedIn)
 
     return (
         <div className="max-w-4xl mx-auto text-center">

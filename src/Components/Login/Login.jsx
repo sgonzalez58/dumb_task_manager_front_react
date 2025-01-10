@@ -6,8 +6,7 @@ const Login = () =>{
 
     const navigate = useNavigate()
 
-    const loginUser = useUserStore((state) => state.login)
-    const [error, setError] = useState({errorStatus: false, errorMessage: ""})
+    const {errorMessage, login, loggedIn} = useUserStore()
 
     const [formData, setFormData] = useState({
         username: '',
@@ -27,9 +26,12 @@ const Login = () =>{
         if(formData.username.length === 0) return null;
         if(formData.password.length === 0) return null;
 
-        const res = await loginUser(formData.username, formData.password)
-        console.log(res)
-        res.err ? setError({errorStatus: true, errorMessage: res.err}) : navigate("/")
+        await login(formData.username, formData.password)
+        
+        console.log(loggedIn, errorMessage)
+        if(loggedIn){
+            navigate("/")
+        }
 
     }
 
@@ -80,7 +82,7 @@ const Login = () =>{
                 S'inscrire ici
                 </Link>
             </p>
-            {error.errorStatus && <h4 className="mt-4 text-center text-red-600">{error.errorMessage}</h4>}
+            { errorMessage && <h4 className="mt-4 text-center text-red-600">{errorMessage}</h4> }
         </div>
     )
 }

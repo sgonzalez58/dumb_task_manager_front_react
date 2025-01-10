@@ -12,12 +12,13 @@ const loginWithCredentials = async (username, password, set) => {
         .then((res) => res.json())
         .then(((data) => {
             if(data.err){
-                return JSON.stringify({err : data.err})
+                set(() => ({errorMessage: "Erreur dans le nom d'utilisateur ou le mot de passe."}))
+                return
             }
             set(() => ({
-                loggedIn: true, userType: data.isAdmin ? userTypes.superAdmin : userTypes.user, username: data.username
+                loggedIn: true, userType: data.user.isAdmin ? userTypes.superAdmin : userTypes.user, username: data.user.username, errorMessage: null
             }))
-            return JSON.stringify({message : "Success"});
+
         }))
 
 }
@@ -26,8 +27,9 @@ const useUserStore = create((set) => ({
     username: 'nobody',
     userType: userTypes.guest,
     loggedIn: false,
+    errorMessage: null,
     login: async (username, password) => loginWithCredentials(username, password, set),
-    logout: () => {set(() => ({ username: nobody, userType: userTypes.guest, loggedIn: false}))}
+    logout: () => {set(() => ({ username: "nobody", userType: userTypes.guest, loggedIn: false}))}
 }))
 
 export default useUserStore

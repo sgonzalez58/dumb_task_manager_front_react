@@ -27,7 +27,7 @@ const Layout = () => {
                                     </Link>
                                 )}
                                 <button onClick={logout} className="text-gray-600 hover:text-gray-900">
-                                    Mes tâches
+                                    Se déconnecter
                                 </button>
                             </div>
                         )}
