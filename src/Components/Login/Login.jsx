@@ -22,12 +22,12 @@ const Login = () =>{
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(formData.username.length === 0) return null;
         if(formData.password.length === 0) return null;
 
-        const res = loginUser(formData.username, formData.password)
+        const res = await loginUser(formData.username, formData.password)
         console.log(res)
         res.err ? setError({errorStatus: true, errorMessage: res.err}) : navigate("/")
 

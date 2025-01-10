@@ -1,7 +1,12 @@
 import { Link, Outlet } from "react-router"
+import useUserStore from "../../stores/UserStore"
 
 
 const Layout = () => {
+
+    const {username, userType, loggedIn, logout} = useUserStore()
+    console.log(username, userType, loggedIn)
+
     return (
         <>
             <header className="bg-white shadow">
@@ -10,14 +15,29 @@ const Layout = () => {
                         <div className="flex items-center">
                             <Link to="/" className="text-xl font-bold text-gray-800">DTM</Link>
                         </div>
-                        <div className="flex items-center space-x-4">
-                            <Link to="/tasks" className="text-gray-600 hover:text-gray-900">
-                                Mes tâches
-                            </Link>
-                            
-                            <Link to="/login" className="text-gray-600 hover:text-gray-900">Connexion</Link>
-                            <Link to="/register" className="text-gray-600 hover:text-gray-900">Inscription</Link>
-                        </div>
+                        { loggedIn && (
+                            <div className="flex items-center space-x-4">
+                                <span class="text-gray-700">Bienvenue, {username}</span>
+                                <Link to="/tasks" className="text-gray-600 hover:text-gray-900">
+                                    Mes tâches
+                                </Link>
+                                { userType == 'admin' && (
+                                    <Link to="/admin" className="text-gray-600 hover:text-gray-900">
+                                        Administration
+                                    </Link>
+                                )}
+                                <button onClick={logout} className="text-gray-600 hover:text-gray-900">
+                                    Mes tâches
+                                </button>
+                            </div>
+                        )}
+                        { !loggedIn && (
+
+                            <div className="flex items-center space-x-4">
+                                <Link to="/login" className="text-gray-600 hover:text-gray-900">Connexion</Link>
+                                <Link to="/register" className="text-gray-600 hover:text-gray-900">Inscription</Link>
+                            </div>
+                        )}                            
                     </div>
                 </nav>
             </header>

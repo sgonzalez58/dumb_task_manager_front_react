@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import userTypes from "../constants/userTypes";
 
-const loginWithCredentials = (username, password, set) => {
+const loginWithCredentials = async (username, password, set) => {
     fetch("http://localhost:3000/api/user/login", {
         method: "POST",
         body: JSON.stringify({ username: username, password: password}),
@@ -26,7 +26,7 @@ const useUserStore = create((set) => ({
     username: 'nobody',
     userType: userTypes.guest,
     loggedIn: false,
-    login: (username, password) => loginWithCredentials(username, password, set),
+    login: async (username, password) => loginWithCredentials(username, password, set),
     logout: () => {set(() => ({ username: nobody, userType: userTypes.guest, loggedIn: false}))}
 }))
 
