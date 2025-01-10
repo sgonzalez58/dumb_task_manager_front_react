@@ -6,11 +6,11 @@ const Login = () =>{
 
     const navigate = useNavigate()
 
-    const {errorMessage, login, loggedIn, username, userType} = useUserStore()
+    const {errorMessage, login, loggedIn} = useUserStore()
 
-    // if(loggedIn){
-    //     navigate("/")
-    // }
+    if(loggedIn){
+        navigate("/")
+    }
 
     const [formData, setFormData] = useState({
         username: '',
@@ -31,12 +31,6 @@ const Login = () =>{
         if(formData.password.length === 0) return null;
 
         login(formData.username, formData.password)
-        
-        console.log(loggedIn, errorMessage, username, userType)
-        if(loggedIn){
-            navigate("/")
-        }
-
     }
 
     return (

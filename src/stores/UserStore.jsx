@@ -25,15 +25,15 @@ const loginWithCredentials = (username, password, set) => {
 
 }
 
-const registerUser = (username, email, password, confirmPassword, grpd, set) => {
+const registerUser = (username, email, password, confirmPassword, gdpr, set) => {
     fetch("http://localhost:3000/api/user/register", {
         method: "POST",
-        body: JSON.stringify({ username, email, password, confirmPassword, grpd}),
+        body: JSON.stringify({ username, email, password, confirmPassword, gdpr}),
         headers: {
             "Content-type": "application/json"
         }
     })
-    .the,((res) =>{
+    .then((res) =>{
         return res.json()
     })
     .then((data) => {
@@ -53,7 +53,7 @@ const useUserStore = create((set) => ({
     userType: userTypes.guest,
     loggedIn: false,
     errorMessage: null,
-    register: (username, email, password, confirmPassword, grpd) => registerUser(username, email, password, confirmPassword, grpd, set),
+    register: (username, email, password, confirmPassword, gdpr) => registerUser(username, email, password, confirmPassword, gdpr, set),
     login: (username, password) => loginWithCredentials(username, password, set),
     logout: () => {set(() => ({ username: "nobody", userType: userTypes.guest, loggedIn: false}))}
 }))

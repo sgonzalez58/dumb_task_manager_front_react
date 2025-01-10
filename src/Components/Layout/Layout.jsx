@@ -16,7 +16,7 @@ const Layout = () => {
                         </div>
                         { loggedIn && (
                             <div className="flex items-center space-x-4">
-                                <span class="text-gray-700">Bienvenue, {username}</span>
+                                <span className="text-gray-700">Bienvenue, {username}</span>
                                 <Link to="/tasks" className="text-gray-600 hover:text-gray-900">
                                     Mes tâches
                                 </Link>

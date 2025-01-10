@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router"
 import useUserStore from "../../stores/UserStore"
+import { useState } from "react"
 
 const Login = () =>{
 
@@ -35,7 +36,7 @@ const Login = () =>{
         if(formData.email.length === 0) return null;
         if(!formData.gdpr) return null;
 
-        await register(formData.username, formData.email, formData.password, formData.confirmPassword, formData.gdpr)
+        register(formData.username, formData.email, formData.password, formData.confirmPassword, formData.gdpr)
 
     }
 
@@ -43,10 +44,6 @@ const Login = () =>{
     return (
         <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md mt-8">
             <h1 className="text-2xl font-bold text-center text-gray-800 mb-8">Inscription</h1>
-
-            {/* <% if (typeof err !== 'undefined') { %>
-            <div className="mb-4 p-4 text-red-700 bg-red-100 rounded-md"><%= err %></div>
-            <% } %> */}
 
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
@@ -138,7 +135,8 @@ const Login = () =>{
                 Se connecter ici
                 </Link>
             </p>
-            </div>
+            { errorMessage && <h4 className="mt-4 text-center text-red-600">{errorMessage}</h4> }
+        </div>
     )
 }
 
