@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router"
 import useUserStore from "../../stores/UserStore"
 import { useState } from "react"
 
-const Login = () =>{
+const Register = () =>{
 
     const navigate = useNavigate()
 
@@ -140,4 +140,4 @@ const Login = () =>{
     )
 }
 
-export default Login
+export default Register

@@ -13,6 +13,7 @@ const Tasks = () =>{
 
     const [tasks, setTasks] = useState([]);
 
+
     useEffect(()=>{
         if(!isLoggedIn || !token){
             navigate('/login')
@@ -35,7 +36,6 @@ const Tasks = () =>{
                     return dateA - dateB;
                 })
                 setTasks(rawTasks)
-                console.log(tasks, rawTasks)
             })
             .catch((error) => console.error(error.message))
     }, [])
@@ -123,7 +123,6 @@ const Tasks = () =>{
                 setErrorTask({errorStatus: true, errorMessage: data.err})
                 return
             }else{
-                console.log(tasks)
                 setTasks(tasks => tasks.map(task => task.id === Number(data.task.id) ? { ...task, completed : !task.completed} : task))
                 return;
             }
@@ -176,6 +175,7 @@ const Tasks = () =>{
             <div className="grid gap-4">
                 { tasks.length > 0 && tasks.map((task) => task && (
                 <div 
+                key={`task-${task.id}`}
                 className={`bg-white p-4 rounded-lg shadow-md ${task.completed ? 'border-l-4 border-green-500' : ''}`}
                 >
                 <div className="flex justify-between items-center">
@@ -197,7 +197,6 @@ const Tasks = () =>{
                         onChange={handleToggleCompletion} className="h-5 w-5 text-blue-600
                         focus:ring-blue-500 border-gray-300 rounded cursor-pointer" /> 
                     <button
-                        key={`task-${task.id}`}
                         id={`delete_task_button-${task.id}`}
                         onClick={handleDeleteTask}
                         className="px-3 py-1.5 bg-red-500 text-white rounded-md hover:bg-red-600 flex items-center"
