@@ -1,8 +1,8 @@
-# React + Vite
+Projet React comprenant les mêmes fonctionnalitées que le projet de base.
+Ajout en plus du role superAdmin.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+back sur le repo https://github.com/sgonzalez58/dumb_task_manager dans la branche api.
 
-Currently, two official plugins are available:
+J'ai pas mis de fichier sur netYpareo parce que le site ne fonctionnait pas dimanche soir.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+J'essaierais de mettre un fichier lundi soir si le site fonctionne.
