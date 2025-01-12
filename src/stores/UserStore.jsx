@@ -18,7 +18,7 @@ const loginWithCredentials = (username, password, set) => {
             return
         }else{
             set(() => ({
-                loggedIn: true, userType: data.user.isAdmin ? userTypes.superAdmin : userTypes.user, username: data.user.username, errorMessage: null
+                loggedIn: true, userType: data.user.isAdmin ? userTypes.superAdmin : userTypes.user, username: data.user.username, errorMessage: null, token: data.token
             }))
         }
     })
@@ -41,7 +41,7 @@ const registerUser = (username, email, password, confirmPassword, gdpr, set) => 
             return set(() => ({errorMessage: data.err}))
         }else{
             set(() => ({
-                loggedIn: true, userType: data.user.isAdmin ? userTypes.superAdmin : userTypes.user, username: data.user.username, errorMessage: null
+                loggedIn: true, userType: data.user.isAdmin ? userTypes.superAdmin : userTypes.user, username: data.user.username, errorMessage: null, token: data.token
             }))
         }
     })
@@ -53,9 +53,10 @@ const useUserStore = create((set) => ({
     userType: userTypes.guest,
     loggedIn: false,
     errorMessage: null,
+    token: '',
     register: (username, email, password, confirmPassword, gdpr) => registerUser(username, email, password, confirmPassword, gdpr, set),
     login: (username, password) => loginWithCredentials(username, password, set),
-    logout: () => {set(() => ({ username: "nobody", userType: userTypes.guest, loggedIn: false}))}
+    logout: () => {set(() => ({ username: "nobody", userType: userTypes.guest, loggedIn: false, token: ''})); }
 }))
 
 export default useUserStore

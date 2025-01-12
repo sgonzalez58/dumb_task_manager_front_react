@@ -9,7 +9,7 @@ const Login = () =>{
     const {errorMessage, login, loggedIn} = useUserStore()
 
     if(loggedIn){
-        navigate("/")
+        navigate("/");
     }
 
     const [formData, setFormData] = useState({

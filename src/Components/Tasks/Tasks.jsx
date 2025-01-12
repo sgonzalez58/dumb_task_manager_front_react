@@ -1,15 +1,37 @@
 import { Link, useNavigate } from "react-router"
 import useUserStore from "../../stores/UserStore"
+import { useEffect, useState } from "react"
 
-const Home = () =>{
+const Tasks = () =>{
 
     const navigate = useNavigate()
 
     const isLoggedIn = useUserStore((state) => state.loggedIn)
+    const token = useUserStore((state) => state.token)
 
-    if(!isLoggedIn){
-        navigate('/login')
-    }
+    const {tasks, setTasks} = useState([]);
+
+    useEffect(()=>{
+        if(!isLoggedIn || !token){
+            navigate('/login')
+            return
+        }
+        fetch("http://localhost:3000/api/tasks", {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        })
+            .then((response) => {
+                console.log(response.json)
+                return response.json()
+            })
+            .then((data) => {
+                setBookList(data)
+                setFilled(true)
+            })
+            .catch((error) => console.error(error.message))
+    }, [])
 
     const handleToggle = (e) =>{
         document.getElementById('addTaskModal').classList.toggle('hidden')
@@ -149,4 +171,4 @@ const Home = () =>{
     )
 }
 
-export default Home
+export default Tasks

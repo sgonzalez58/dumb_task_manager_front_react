@@ -1,10 +1,17 @@
-import { Link, Outlet } from "react-router"
+import { Link, Outlet, useNavigate } from "react-router"
 import useUserStore from "../../stores/UserStore"
 
 
 const Layout = () => {
 
+    const navigate = useNavigate()
+
     const {username, userType, loggedIn, logout} = useUserStore()
+
+    const handleDisconnect = () =>{
+        logout();
+        return navigate('/login');
+    }
 
     return (
         <>
@@ -25,7 +32,7 @@ const Layout = () => {
                                         Administration
                                     </Link>
                                 )}
-                                <button onClick={logout} className="text-gray-600 hover:text-gray-900">
+                                <button onClick={handleDisconnect} className="text-gray-600 hover:text-gray-900">
                                     Se déconnecter
                                 </button>
                             </div>
