@@ -135,7 +135,7 @@ const Login = () =>{
                 Se connecter ici
                 </Link>
             </p>
-            { errorMessage && <h4 className="mt-4 text-center text-red-600">{errorMessage}</h4> }
+            { errorMessage && <p className="mt-4 text-center text-red-600">{errorMessage}</p> }
         </div>
     )
 }
