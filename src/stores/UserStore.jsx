@@ -18,7 +18,7 @@ const loginWithCredentials = (username, password, set) => {
             return
         }else{
             set(() => ({
-                loggedIn: true, userType: data.user.isAdmin ? userTypes.superAdmin : userTypes.user, username: data.user.username, errorMessage: null, token: data.token
+                loggedIn: true, userType: data.user.role, username: data.user.username, errorMessage: null, token: data.token
             }))
         }
     })
@@ -41,7 +41,7 @@ const registerUser = (username, email, password, confirmPassword, gdpr, set) => 
             return set(() => ({errorMessage: data.err}))
         }else{
             set(() => ({
-                loggedIn: true, userType: data.user.isAdmin ? userTypes.superAdmin : userTypes.user, username: data.user.username, errorMessage: null, token: data.token
+                loggedIn: true, userType: data.user.role , username: data.user.username, errorMessage: null, token: data.token
             }))
         }
     })

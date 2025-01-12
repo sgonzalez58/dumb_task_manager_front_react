@@ -27,7 +27,7 @@ const Layout = () => {
                                 <Link to="/tasks" className="text-gray-600 hover:text-gray-900">
                                     Mes tâches
                                 </Link>
-                                { userType == 'admin' || userType == 'superAdmin' && (
+                                { (userType == 'admin' || userType == 'superAdmin') && (
                                     <Link to="/admin" className="text-gray-600 hover:text-gray-900">
                                         Administration
                                     </Link>

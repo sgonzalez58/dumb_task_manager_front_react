@@ -39,11 +39,11 @@ const Administration = () =>{
     const handleChangeRole = (e) =>{
         e.preventDefault();
         const user_id = e.target.id.split('-')[1];
-        const isAdmin = e.target.checked;
+        const role_user = e.target.value;
         fetch(`http://localhost:3000/api/admin/toggle-admin/${user_id}`, {
             method: "POST",
             body: JSON.stringify({
-                isAdmin: isAdmin
+                role_user: role_user
             }),
             headers: {
                 "Content-Type": "application/json",
@@ -55,10 +55,10 @@ const Administration = () =>{
         })
         .then((data)=>{
             if(data.err){
-                setErrorTask({errorStatus: true, errorMessage: data.err})
+                setErrorAdmin({errorStatus: true, errorMessage: data.err})
                 return
             }else{
-                setUsers(users => users.map(user => user.id === Number(data.user.id) ? { ...user, isadmin : !user.isadmin} : user))
+                setUsers(users => users.map(user => user.id === Number(data.user.id) ? { ...user, role : data.user.role} : user))
                 return;
             }
         })
@@ -123,10 +123,14 @@ const Administration = () =>{
                             <div
                                 className="flex items-center"
                             >
-                                <input id={`toggle_user-${user.id}`} type="checkbox" name="isAdmin" checked={user.isadmin ? 'checked' : ''} disabled={ user.username === myUsername || userType != 'superAdmin' ? 'disabled' : ''}
-                                onChange={handleChangeRole} className="h-4 w-4 text-blue-600
-                                focus:ring-blue-500 border-gray-300 rounded mr-2" />
-                                <label className="text-sm text-gray-700">Admin</label>
+                                
+                                <label className="text-sm text-gray-700 me-1">Role:</label>
+                                <select id={`change_role_user-${user.id}`} name="role_user" disabled={ user.username === myUsername || userType == 'admin' ? 'disabled' : ''}
+                                onChange={handleChangeRole} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected={ user.role == 'user' ? true : false}>user</option>
+                                    <option selected={ user.role == 'admin' ? true : false}>admin</option>
+                                    <option selected={ user.role == 'superAdmin' ? true : false}>superAdmin</option>
+                                </select>
                             </div>
                             <button
                                 onClick={handleDeleteUser}
